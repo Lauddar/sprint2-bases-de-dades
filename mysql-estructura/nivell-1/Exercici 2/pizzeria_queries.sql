@@ -1,0 +1,2 @@
+SELECT count(c.begudes) AS begudes_localitat_Ozuna FROM comandes c JOIN botigues b ON c.botiga = b.id WHERE b.localitat = 'Ozuna';
+SELECT count(c.id_comanda) AS comandes_empleat_2 FROM comandes c JOIN botigues b ON c.botiga = b.id JOIN empleats e ON b.id = e.id_botiga WHERE e.id = 2;

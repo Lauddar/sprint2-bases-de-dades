@@ -1,0 +1,3 @@
+SELECT * FROM venda_clients WHERE id_client = 3;
+SELECT v.id_empleat, u.* FROM ulleres u LEFT JOIN venda_clients v ON u.id = v.id_ulleres LEFT JOIN empleats e ON v.id_empleat = e.id WHERE v.id_empleat = 1 AND v.data_venda BETWEEN '2021-01-01 00:00:00' AND '2021-12-31 23:59:59';
+SELECT p.*, count(v.id) AS vendes FROM proveidors p JOIN ulleres u ON p.id = u.id_proveidor JOIN venda_clients v ON u.id = v.id_ulleres GROUP BY p.id HAVING count(v.id) > 2;
