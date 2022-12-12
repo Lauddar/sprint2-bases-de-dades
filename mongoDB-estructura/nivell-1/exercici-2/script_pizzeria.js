@@ -1,30 +1,17 @@
 use pizzeria
-db.dropDatabase()
+db.botigues.drop()
 db.botigues.insertMany([
-    {
-        _id:ObjectId("63947b7d95b958422c5e6d0e"),
-        adreça:{
-            carrer:"Plaça Jordi, 85, 2º E",
-            codi_postal:"94875",
-            localitat:"Ulla",
-            provincia:"Cantabria"
-            },
-        empleats: [ObjectId("63947c11c0e5db89fc2b39fe"), ObjectId("63947c21d237b47a3e66ed9c")]
-    },
-    {
-        _id: ObjectId("63947ddcb7e705070f35bdd3"),
-        adreça:{
-            carrer:"Travesía Laia, 13, 8º A",
-            codi_postal:"62312",
-            localitat:"Ozuna",
-            provincia:"Lugo"
+{
+    id_botiga:1,
+    adreça:{
+        carrer:"Plaça Jordi, 85, 2º E",
+        codi_postal:"94875",
+        localitat:"Ulla",
+        provincia:"Cantabria"
         },
-        empleats: [ObjectId("63947d6b97f9c3e18ac0064b"), ObjectId("63947d71b6f48cdede1f6486")]
-    }
-])
-db.empleats.insertMany([
+    empleats: [
         {
-            _id: ObjectId("63947c11c0e5db89fc2b39fe"),
+            id_empleat:1,
             nom:"Ane",
             cognoms:"Almaráz Rodríguez",
             nif:"16598099B",
@@ -32,33 +19,16 @@ db.empleats.insertMany([
             carrec:"cuiner"
         },
         {
-            _id: ObjectId("63947c21d237b47a3e66ed9c"),
-            nom:"Unax",
-            cognoms:"Pina Saiz",
-            nif:"10338844E",
-            telefon:"661340937",
-            carrec:"repartidor"
-        },
-        {
-            _id: ObjectId("63947d6b97f9c3e18ac0064b"),
-            nom:"Tomas",
-            cognoms:"Redondo Figueroa",
-            nif:"10083265L",
-            telefon:"691114260",
-            carrec:"cuiner"
-        },
-        {
-            _id: ObjectId("63947d71b6f48cdede1f6486"),
-            nom:"Purificacion",
-            cognoms:"Fraile Toribio",
-            nif:"31066883R",
-            telefon:"640570604",
-            carrec:"repartidor"
+        id_empleat:2,
+        nom:"Unax",
+        cognoms:"Pina Saiz",
+        nif:"10338844E",
+        telefon:"661340937",
+        carrec:"repartidor"
         }
-])
-db.clients.insertMany([
-    {
-        _id: ObjectId("6394823c07126d3e872f741c"),
+    ],
+    clients: {
+        id_client:1,
         nom:"Helena",
         cognoms:"Armijo Garica",
         adreça: {
@@ -68,11 +38,79 @@ db.clients.insertMany([
             provincia:"Toledo"
         },
         telefon:"628252031",
-        comandes: [ObjectId("6394d11e2fdbab357837bcdc")]
+        comandes: {
+            id_comanda:1,
+            data_comanda:new Date("2021-11-26T19:27:48Z"),
+            recollida: {
+                tipus:"domicili",
+                repartidor:"Unax Pina Saiz'",
+                hora:new Date("2021-11-26T20:03:48Z")
+            },
+            productes: {
+                pizzes: 
+                {
+                    id_producte:1,
+                    nom:"Prosciutto",
+                    descripcio:"Mozzarela, jamón y queso",
+                    imatge:"",
+                    preu:9.99,
+                    categoria: {
+                        id_categoria:1,
+                        nom:"clásicas"
+                    },
+                quantitat:1       
+                },
+                hamburgueses:
+                {
+                    id_producte:3,
+                    nom:"Completa",
+                    descripcio:"Hamburguesa, lechuga, tomate, queso y bacon",
+                    imatge:"",
+                    preu:5.99,
+                    quantitat:1
+                },
+                begudes: 
+                {
+                    id_producte:5,
+                    nom:"Cocacola",
+                    descripcio:"Cocacola clásica",
+                    imatge:"",
+                    preu:1.99,
+                    quantitat:2
+                }
+            },
+            preu_total:19.96,
+        }
+    }
+},
+{
+    id_botiga:2,
+    adreça:{
+        carrer:"Travesía Laia, 13, 8º A",
+        codi_postal:"62312",
+        localitat:"Ozuna",
+        provincia:"Lugo"
     },
-    {
-        _id: ObjectId("639482795a375fba24a43859"),
-        nom:"Óscar",
+    empleats: [
+        {
+            id_empleat:1,
+            nom:"Tomas",
+            cognoms:"Redondo Figueroa",
+            nif:"10083265L",
+            telefon:"691114260",
+            carrec:"cuiner"
+        },
+        {
+            id_empleat:2,
+            nom:"Purificacion",
+            cognoms:"Fraile Toribio",
+            nif:"31066883R",
+            telefon:"640570604",
+            carrec:"repartidor"
+        }],
+    clients: {
+        id_client:2,
+        nom:"'Óscar",
         cognoms:"Heredia Barroso",
         adreça: {
             carrer:"Carrer Montes, 904, Bajo 6º",
@@ -81,140 +119,86 @@ db.clients.insertMany([
             provincia:"Cádiz"
         },
         telefon:"699621916",
-        comandes: [ObjectId("6394d177e3b7c1314672bf80"), ObjectId("6394d171f8efb0213e8b6148")]
+        comandes: [
+        {
+            id_comanda:2,
+            data_comanda:new Date("2021-11-30T21:51:12Z"),
+            recollida: {
+                tipus:"botiga",
+            },
+            productes: {
+                pizzes: [
+                {
+                    id_producte:1,
+                    nom:"Prosciutto",
+                    descripcio:"Mozzarela, jamón y queso",
+                    imatge:"",
+                    preu:9.99,
+                    categoria: {
+                        id_categoria:1,
+                        nom:"clásicas"
+                    },
+                    quantitat:2       
+                },
+                {
+                    id_producte:2,
+                    nom:"Tropical",
+                    descripcio:"Mozzarela, jamón y piña",
+                    imatge:"",
+                    preu:9.99,
+                    categoria: {
+                        id_categoria:2,
+                        nom:"verano"
+                    },
+                    quantitat:1
+                }],
+                begudes: {
+                    id_producte:5,
+                    nom:"Cocacola",
+                    descripcio:"Cocacola clásica",
+                    imatge:"",
+                    preu:1.99,
+                    quantitat:1
+                }
+            },
+            preu_total:31.96,
+        },
+        {
+            id_comanda:3,
+            data_comanda:new Date("2021-11-30T21:51:12Z"),
+            recollida: {
+                tipus:"botiga",
+            },
+            productes: {
+                hamburgueses: {
+                    id_producte:3,
+                    nom:"Completa",
+                    descripcio:"Hamburguesa, lechuga, tomate, queso y bacon",
+                    imatge:"",
+                    preu:5.99,
+                    quantitat:2 
+                },
+                begudes: [
+                    {
+                        id_producte:6,
+                        nom:"Nestea",
+                        descripcio:"Nestea sabor limón",
+                        imatge:"",
+                        preu:1.99,
+                        quantitat:1
+                    },
+                    {
+                        id_producte:5,
+                        nom:"Cocacola",
+                        descripcio:"Cocacola clásica",
+                        imatge:"",
+                        preu:1.99,
+                        quantitat:1
+                    }
+                ]
+            
+            },
+            preu_total:15.96,
+        }]
     }
-])
-db.productes.insertMany([
-    {
-        _id: ObjectId("639484482f88d53aae225fde"),
-        nom:"Prosciutto",
-        descripcio:"Mozzarella, jamón y queso",
-        tipus:"pizza",
-        imatge:"prosciutto.jpg",
-        preu:9.99,
-        categoria: ObjectId("6394cb973edc49bd0d1a9f70")
-    },
-    {
-        _id: ObjectId("6394846a71ccbcff9ad2e3db"),
-        nom:"Tropical",
-        descripcio:"Mozzarella, jamón y piña",
-        tipus:"pizza",
-        imatge:"tropical.jpg",
-        preu:9.99,
-        categoria: ObjectId("6394cbd35c421972c104ad6e")
-    },
-    {
-        _id: ObjectId("6394847aedc7757547fdf02d"),
-        nom:"Completa",
-        descripcio:"Hamburguesa, lechuga, tomate, queso y bacon",
-        tipus:"hamburguesa",
-        imatge:"completa.jpg",
-        preu:5.99
-    },
-    {
-        _id: ObjectId("6394848166e8f2da3791d706"),
-        nom:"Cocacola",
-        descripcio:"Cocacola clásica",
-        tipus:"beguda",
-        imatge:"cocacola.jpg",
-        preu:1.99,
-    },
-    {
-        _id: ObjectId("639484853627f02d361d8a30"),
-        nom:"Nestea",
-        descripcio:"Nestea sabor limón",
-        tipus:"beguda",
-        imatge:"nestea.jpg",
-        preu:1.99,
-    }
-])
-db.comandes.insertMany([
-    {
-        _id: ObjectId("6394d11e2fdbab357837bcdc"),
-        client: ObjectId("6394823c07126d3e872f741c"),
-        botiga: ObjectId("63947b7d95b958422c5e6d0e"),
-        data_comanda:new Date("2021-11-26T19:27:48Z"),
-        recollida: {
-            tipus:"domicili",
-            repartidor: ObjectId("63947c21d237b47a3e66ed9c"),
-            hora:new Date("2021-11-26T20:03:48Z")
-        },
-        productes: {
-            pizzes: {
-                pizza: ObjectId("639484482f88d53aae225fde"),
-                quantitat:1 
-            },
-            hamburgueses: {
-                hamburguesa: ObjectId("6394847aedc7757547fdf02d"),
-                quantitat:1 
-            },
-            begudes: {
-                begudes: ObjectId("6394848166e8f2da3791d706"),
-                quantitat:2 
-            },
-    
-        },
-        preu_total:19.96,
-    },
-    {
-        _id: ObjectId("6394d177e3b7c1314672bf80"),
-        client: ObjectId("639482795a375fba24a43859"),
-        botiga: ObjectId("63947ddcb7e705070f35bdd3"),
-        data_comanda:new Date("2021-11-30T21:51:12Z"),
-        recollida: {
-            tipus:"botiga"
-        },
-        productes: {
-            pizzes: [
-            {
-                pizza: ObjectId("639484482f88d53aae225fde"),
-                quantitat:2
-            },
-            {
-                pizza: ObjectId("6394846a71ccbcff9ad2e3db"),
-                quantitat:1
-            }],
-            begudes: {
-                beguda: ObjectId("6394848166e8f2da3791d706"),
-                quantitat:1
-            },
-        },
-        preu_total:31.96
-    },
-    {
-        _id: ObjectId("6394d171f8efb0213e8b6148"),
-        client: ObjectId("639482795a375fba24a43859"),
-        botiga: ObjectId("63947ddcb7e705070f35bdd3"),
-        data_comanda:new Date("2021-11-30T21:51:12Z"),
-        recollida: {
-            tipus:"botiga"
-        },
-        productes: {
-            hamburgueses: {
-                hamburguesa:ObjectId("6394847aedc7757547fdf02d"),
-                quantitat:2 
-            },
-            begudes: [
-            {
-                beguda: ObjectId("6394848166e8f2da3791d706"),
-                quantitat:1
-            },
-            {
-                beguda:  ObjectId("639484853627f02d361d8a30"),
-                quantitat:1
-            }]
-        },
-        preu_total:15.96
-    }
-])
-db.categories.insertMany([
-    {
-        _id: ObjectId("6394cb973edc49bd0d1a9f70"),
-        nom: "clásica"
-    },
-    {
-        _id: ObjectId("6394cbd35c421972c104ad6e"),
-        nom: "verano"
-    }
-])
-
+}])
